@@ -1,0 +1,16 @@
+haproxy:
+  build: ./haproxy
+  ports: 
+    - "80:8080"
+  links:
+    - node
+node:
+  build: ./sloth
+  ports: 
+    - "3000:3000"
+  volumes:
+    - ./sloth:/code
+  links:
+    - mongo
+mongo:
+  image: mongo
