@@ -8,7 +8,7 @@ EXPOSE 3000
 RUN mkdir /src/
 
 # Add the files
-ADD . /src/
+COPY . /src/
 
 # be in the right place
 WORKDIR /src
