@@ -1,24 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var os = require('os');
-var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
-var ObjectId = require('mongodb').ObjectID;
-var url = 'mongodb://mongo:27017/test';
+var MongoClient = require('mongodb').MongoClient,
+  test = require('assert');
+// Connection url
+var url = 'mongodb://mongo:27017/log';
 var db;
 
-// Initialize connection once
-MongoClient.connect(url, function(err, database) {
-  if(err) throw err;
-  db = database;
-});
+// Connect using MongoClient
+
 
 var incrementVisit = function(db, cb) {
-  db.collection('log').update({totalVisitCount: true},{totalVisitCount: 1},{upsert: true, multi: false},function(err, res) {
-    if (err) throw err;
-    db.collection('log').findOne({totalVisitCount: true}, function(err, res) {
-      if (err) console.log(error);
-      return cb(null, res.totalVisitCount);
+  MongoClient.connect(url, function(err, db) {
+    if (err) console.log(err);
+    db.collection('log', function(err, collection) {
+      collection.update({totalVisitCount: true},{totalVisitCount: 1},{upsert: true, multi: false},function(err, res) {
+        if (err) console.log err;
+        collection.findOne({totalVisitCount: true}, function(err, res) {
+          if (err) console.log(err);
+          return cb(null, res.totalVisitCount);
+        });
+      });
     });
   });
 };
