@@ -1,7 +1,7 @@
 haproxy:
   image: tutum/haproxy
   links:
-    - node
+    - "node:node"
   ports:
     - "1936:1936"
     - "80:80"
@@ -10,7 +10,7 @@ node:
   expose: 
     - 3000
   links:
-    - mongo
+    - "mongo:mongo"
 mongo:
   image: mongo
   expose: 
