@@ -1,18 +1,26 @@
-haproxy:
-  image: tutum/haproxy
+nginx:
+  build: ./nginx
   links:
-    - "node:node"
+  - consul
   ports:
-    - "1936:1936"
-    - "80:80"
-node:
+  - "80:80"
+app:
   build: ./sloth
-  expose: 
-    - 3000
+  ports:
+  - "80"
+consul:
+  command: -server -bootstrap -advertise $ROUTABLE_IP
+  image: progrium/consul:latest
+  ports:
+  - "8300:8300"
+  - "8400:8400"
+  - "8500:8500"
+  - "8600:53/udp"
+registrator:
+  command: consul://consul:8500
+  image: progrium/registrator:latest
   links:
-    - "mongo:mongo"
-mongo:
-  image: mongo
-  expose: 
-    - 27017
+  - consul
+  volumes:
+  - "/var/run/docker.sock:/tmp/docker.sock"
 
