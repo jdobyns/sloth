@@ -3,8 +3,8 @@ Sloth Demo
 
 Prerequisites
 -------------
--Working docker, docker-machine, and docker-compose commands
--API credentials for your chosen provider (or working virtualbox environment for testing locally)
+- Working docker, docker-machine, and docker-compose commands
+- API credentials for your chosen provider (or working virtualbox environment for testing locally)
 
 Getting Started
 ----------------
