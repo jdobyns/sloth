@@ -9,9 +9,5 @@
 docker-machine create --driver amazonec2 aws01
 
 # Set up cloudflare with the right IP address
-curl -X GET "https://api.cloudflare.com/client/v4/zones/cd7d0123e3012345da9420df9514dad0" \
-  -H "Content-Type:application/json" \
-  -H "X-Auth-Key:1234567893feefc5f0q5000bfo0c38d90bbeb" \
-  -H "X-Auth-Email:example@example.com"
-
+# XXX USE THIS https://www.npmjs.com/package/cloudflare-cli
 
