@@ -24,10 +24,8 @@ var incrementVisit = function(url, cb) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  getMongoUrl(url, function(err, url) {
-    incrementVisit(url, function(err, visitCount) {
-      res.render('index', { title: 'Sloth!', hostname: os.hostname(), visit: visitCount});
-    });
+  incrementVisit(url, function(err, visitCount) {
+    res.render('index', { title: 'Sloth!', hostname: os.hostname(), visit: visitCount});
   });
 });
 
