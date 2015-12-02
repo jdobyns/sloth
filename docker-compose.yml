@@ -1,26 +1,18 @@
 nginx:
-  build: ./nginx
-  links:
-  - consul
+  image: jwilder/nginx-proxy
+  volumes:
+  - "/var/run/docker.sock:/tmp/docker.sock:ro"
   ports:
   - "80:80"
 app:
   build: ./sloth
+  environment:
+  - VIRTUAL_HOST=slothracing.com
   ports:
-  - "80"
-consul:
-  command: -server -bootstrap -advertise $ROUTABLE_IP
-  image: progrium/consul:latest
-  ports:
-  - "8300:8300"
-  - "8400:8400"
-  - "8500:8500"
-  - "8600:53/udp"
-registrator:
-  command: consul://consul:8500
-  image: progrium/registrator:latest
+  - "3000"
   links:
-  - consul
-  volumes:
-  - "/var/run/docker.sock:/tmp/docker.sock"
-
+  - mongo
+mongo:
+  image: mongo
+  expose: 
+    - 27017
