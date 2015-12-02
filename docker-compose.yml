@@ -4,6 +4,9 @@ nginx:
   - "/var/run/docker.sock:/tmp/docker.sock:ro"
   ports:
   - "80:80"
+  log_driver: "syslog"
+  log_opt:
+    syslog-address: "tcp://52.34.237.164:5000"
 app:
   build: .
   environment:
@@ -12,7 +15,13 @@ app:
   - "3000"
   links:
   - mongo
+  log_driver: "syslog"
+  log_opt:
+    syslog-address: "tcp://52.34.237.164:5000"
 mongo:
   image: mongo
   expose: 
     - 27017
+  log_driver: "syslog"
+  log_opt:
+    syslog-address: "tcp://52.34.237.164:5000"

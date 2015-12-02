@@ -11,3 +11,6 @@ docker-machine create --driver amazonec2 aws01
 # Set up cloudflare with the right IP address
 # XXX USE THIS https://www.npmjs.com/package/cloudflare-cli
 
+# Run the main dockerfile in this repo
+
+# Set up elastic on a second docker-machine?
