@@ -8,9 +8,16 @@
 # Set up the docker host. This will be an ubuntu 14.04 image according to the docker-machine docs
 docker-machine create --driver amazonec2 aws01
 
-# Set up cloudflare with the right IP address
-# XXX USE THIS https://www.npmjs.com/package/cloudflare-cli
+# Get the env together
+eval "$(docker-machine env aws01)"
 
 # Run the main dockerfile in this repo
+docker-compose up -d
 
-# Set up elastic on a second docker-machine?
+# Setting up the elk stack is still incomplete, but here's the basic gist of it
+docker-machine create --driver amazonec2 aws02
+
+# Run the stack
+eval "$(docker-machine env aws02)
+
+docker run -p 5601:5601 -p 9200:9200 -p 5000:5000 -it --name elk sebp/elk
