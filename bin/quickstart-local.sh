@@ -1,7 +1,7 @@
 #!/bin/bash
 #This is designed to set up this demo locally
 # Set up the docker host. This will be the latest boot2docker image provided by the docker community
-docker-machine create demo01
+docker-machine create -d virtualbox demo01
 
 # Get the env together
 eval "$(docker-machine env demo01)"
@@ -10,7 +10,7 @@ eval "$(docker-machine env demo01)"
 docker-compose up -d
 
 # Setting up the elk stack is still incomplete, but here's the basic gist of it
-docker-machine create demo02
+docker-machine create -d virtualbox demo02
 
 # Run the elk stack
 eval "$(docker-machine env demo02)"
