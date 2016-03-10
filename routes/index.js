@@ -3,7 +3,7 @@ var router = express.Router();
 var os = require('os');
 var MongoClient = require('mongodb').MongoClient,
   test = require('assert');
-var url = "mongodb://mongo:27017/log";
+var url = "mongodb://dev.opsflo.com:27017/log";
 
 // Connect using MongoClient
 var incrementVisit = function(url, cb) {
